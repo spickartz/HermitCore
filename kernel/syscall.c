@@ -40,6 +40,7 @@
 #include <asm/uhyve.h>
 #include <asm/io.h>
 #include <sys/poll.h>
+#include <sys/shm.h>
 
 #include <lwip/sockets.h>
 #include <lwip/err.h>
@@ -835,3 +836,25 @@ void __sys_env_unlock(void)
 {
 	spinlock_irqsave_unlock(&env_lock);
 }
+
+
+int shmget(key_t key, size_t size, int shmflg)
+{
+	return -ENOSYS;
+}
+
+void *shmat(int shmid, const void *shmaddr, int shmflg)
+{
+	return NULL;
+}
+
+int shmdt(const void *shmaddr)
+{
+	return -ENOSYS;
+}
+
+int shmctl(int shmid, int cmd, struct shmid_ds *buf)
+{
+	return -ENOSYS;
+}
+

@@ -1,9 +1,9 @@
-/* 
+/*
  * Written by the Chair for Operating Systems, RWTH Aachen University
- * 
+ *
  * NO Copyright (C) 2010-2011, Stefan Lankes
  * consider these trivial macros to be public domain.
- * 
+ *
  * These functions are distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
@@ -21,7 +21,11 @@
 
 typedef uint16_t in_port_t;
 
-int inet_pton(int af, const char *src, void *dst);
+//int inet_pton(int af, const char *src, void *dst);
+
+#define inet_pton(af,src,dst) \
+    (((af) == AF_INET6) ? ip6addr_aton((src),(ip6_addr_t*)(dst)) \
+     : (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0))
 
 /** 255.255.255.255 */
 #define IPADDR_NONE         ((uint32_t)0xffffffffUL)
